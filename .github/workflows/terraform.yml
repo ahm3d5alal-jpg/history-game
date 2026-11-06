@@ -34,8 +34,17 @@ jobs:
       - name: Check Android files
         run: ls -la android/app
 
+     
+      - name: Install Android NDK
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager --install "ndk;27.0.12077973"
+
       - name: Build APK
         run: flutter build apk --release
+        env:
+          ANDROID_NDK_VERSION: 27.0.12077973
+ 
 
       - uses: actions/upload-artifact@v4
         with:
